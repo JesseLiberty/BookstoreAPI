@@ -11,6 +11,15 @@
 *.sln.docstates
 *.env
 
+# Azurite storage emulator data
+azurite/
+__blobstorage__/
+__queuestorage__/
+__azurite_db*__
+
+# Azure Functions
+local.settings.json
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
