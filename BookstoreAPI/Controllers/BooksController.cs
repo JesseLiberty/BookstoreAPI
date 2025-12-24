@@ -59,15 +59,16 @@ public class BooksController : ControllerBase
 
         _logger.LogInformation("Updating book with id {Id}", id);
         
-        var existingBook = await _bookService.GetBookByIdAsync(id);
-        if (existingBook == null)
+        try
+        {
+            var updatedBook = await _bookService.UpdateBookAsync(book);
+            return Ok(updatedBook);
+        }
+        catch (KeyNotFoundException)
         {
             _logger.LogWarning("Book with id {Id} not found for update", id);
             return NotFound();
         }
-
-        var updatedBook = await _bookService.UpdateBookAsync(book);
-        return Ok(updatedBook);
     }
 
     [HttpDelete("{id}")]

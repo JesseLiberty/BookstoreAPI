@@ -1,6 +1,46 @@
 @BookstoreAPI_HostAddress = http://localhost:5050
 
-GET {{BookstoreAPI_HostAddress}}/weatherforecast/
+# Get all books
+GET {{BookstoreAPI_HostAddress}}/api/books
 Accept: application/json
 
 ###
+
+# Get book by ID
+GET {{BookstoreAPI_HostAddress}}/api/books/1
+Accept: application/json
+
+###
+
+# Create a new book
+POST {{BookstoreAPI_HostAddress}}/api/books
+Content-Type: application/json
+
+{
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "isbn": "978-0-7432-7356-5",
+  "price": 12.99,
+  "publicationYear": 1925
+}
+
+###
+
+# Update a book
+PUT {{BookstoreAPI_HostAddress}}/api/books/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "The Great Gatsby (Updated)",
+  "author": "F. Scott Fitzgerald",
+  "isbn": "978-0-7432-7356-5",
+  "price": 15.99,
+  "publicationYear": 1925
+}
+
+###
+
+# Delete a book
+DELETE {{BookstoreAPI_HostAddress}}/api/books/1
+

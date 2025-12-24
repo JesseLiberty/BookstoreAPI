@@ -33,11 +33,13 @@ public class BookRepository : IBookRepository
     public async Task<Book> UpdateBookAsync(Book book)
     {
         var existingBook = await _context.Books.FindAsync(book.Id);
-        if (existingBook != null)
+        if (existingBook == null)
         {
-            _context.Entry(existingBook).CurrentValues.SetValues(book);
-            await _context.SaveChangesAsync();
+            throw new KeyNotFoundException($"Book with ID {book.Id} not found.");
         }
+        
+        _context.Entry(existingBook).CurrentValues.SetValues(book);
+        await _context.SaveChangesAsync();
         return book;
     }
 
