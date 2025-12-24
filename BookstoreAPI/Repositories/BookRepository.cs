@@ -32,8 +32,12 @@ public class BookRepository : IBookRepository
 
     public async Task<Book> UpdateBookAsync(Book book)
     {
-        _context.Entry(book).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
+        var existingBook = await _context.Books.FindAsync(book.Id);
+        if (existingBook != null)
+        {
+            _context.Entry(existingBook).CurrentValues.SetValues(book);
+            await _context.SaveChangesAsync();
+        }
         return book;
     }
 
